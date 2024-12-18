@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        .header, .footer {
+            background-color: #fff;
+            color: #585454;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 3px solid #ccc;
+        }
+        .container-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, transform 0.2s;
+            width: 100%;
+        }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        input[type="date"], input[type="number"] {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        button {
+            padding: 12px 25px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <img src="vahan0.jpeg" alt="Company Logo" style="width: 200px; height: 80px;">
+    <h1>Date Calculator</h1>
+</div>
+
+<div class="container-wrapper">
+    <div class="container">
+        <div class="card">
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" required>
+            </div>
+            <div class="form-group">
+                <label for="days">Number of Days:</label>
+                <input type="number" id="days" min="1" placeholder="Enter number of days" required>
+            </div>
+            <button onclick="calculateFutureDate()">Calculate Date</button>
+
+            <div class="result" id="result" style="display:none;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Vahan Yojana. All rights reserved.</p>
+</div>
+
+<script>
+function calculateFutureDate() {
+    const startDate = new Date(document.getElementById('startDate').value);
+    const days = parseInt(document.getElementById('days').value);
+
+    // Add days to the start date
+    const futureDate = new Date(startDate);
+    futureDate.setDate(futureDate.getDate() + (days -1));
+
+    // Format the date to dd/mm/yyyy
+    const day = String(futureDate.getDate()).padStart(2, '0');
+    const month = String(futureDate.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const year = futureDate.getFullYear();
+
+    const formattedDate = `${day}/${month}/${year}`;
+
+    // Display the result
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `<strong>Future Date (${days} days):</strong> ${formattedDate}`;
+}
+</script>
+
+</body>
+</html>
